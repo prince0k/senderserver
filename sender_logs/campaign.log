@@ -1,0 +1,75 @@
+2026-03-03T21:48:05+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","createOnly":true}
+2026-03-04T03:19:17+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523360}
+2026-03-04T03:28:53+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523361}
+2026-03-04T03:30:06+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523362}
+2026-03-04T03:37:14+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523359}
+2026-03-04T03:48:13+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523363}
+2026-03-04T04:24:28+00:00 | CREATE_CAMPAIGN_FORBIDDEN
+2026-03-04T04:25:20+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"jan_usa_yahoo","createOnly":false}
+2026-03-04T04:25:41+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"jan_usa_yahoo","mode":"TEST","pid":1523360}
+2026-03-04T04:33:23+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523363}
+2026-03-04T04:47:50+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523359}
+2026-03-04T04:51:47+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523360}
+2026-03-04T04:59:33+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"gmail_bladdershield_vsl_16274_20260303_by_usr00005_srv_jak24","mode":"TEST","pid":1523363}
+2026-04-16T09:48:07+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"comcast_select_my_policy_11930_3000_20260406_by_usr00005_srv_jak25_v1","mode":"TEST","pid":1367}
+2026-04-16T09:49:10+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"comcast_select_my_policy_11930_3000_20260406_by_usr00005_srv_jak25_v1","mode":"TEST","pid":1363}
+2026-04-16T09:49:55+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"comcast_select_my_policy_11930_3000_20260406_by_usr00005_srv_jak25_v1","mode":"TEST","pid":1367}
+2026-04-23T00:10:39+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-04-23T00:11:19+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2319658}
+2026-04-23T00:12:00+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":159906}
+2026-04-23T00:15:04+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2319714}
+2026-04-23T00:19:18+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2319713}
+2026-04-23T00:23:55+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":1366}
+2026-04-23T00:31:01+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2319715}
+2026-04-23T10:53:42+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2319658}
+2026-04-23T10:59:54+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_crockpot_beef_and_broccoli_0002_3001_20260423_by_usr00005_srv_jak25_v1","mode":"TEST","pid":1364}
+2026-04-23T11:07:30+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_cinnamon_eggplant_jam_0030_3001_20260423_by_sheet_worker_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-04-23T12:15:49+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_cinnamon_eggplant_jam_0030_3001_20260423_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2036413}
+2026-04-23T12:17:20+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_cinnamon_eggplant_jam_0030_3001_20260423_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2036408}
+2026-04-23T12:17:58+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_cinnamon_eggplant_jam_0030_3001_20260423_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":159906}
+2026-04-23T12:19:10+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_cinnamon_eggplant_jam_0030_3001_20260423_by_sheet_worker_srv_jak25_v1","mode":"LIVE","pid":2319658}
+2026-04-24T08:49:31+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-04-24T11:18:21+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1365}
+2026-04-24T11:20:32+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":159906}
+2026-04-24T11:20:49+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2036413}
+2026-04-24T11:20:58+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1366}
+2026-04-24T11:21:39+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2319716}
+2026-04-24T11:23:03+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1364}
+2026-04-24T11:23:34+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1363}
+2026-04-24T11:24:15+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2319716}
+2026-04-24T11:24:17+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1363}
+2026-04-24T11:24:18+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1364}
+2026-04-24T11:24:20+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2319715}
+2026-04-24T11:24:57+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1365}
+2026-04-24T11:24:59+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2319658}
+2026-04-24T11:25:00+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2239554}
+2026-04-24T11:35:56+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_instant_pot_fajita_rice_0032_3001_20260424_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2319715}
+2026-04-25T10:15:19+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_easy_churro_bites_0009_3001_20260425_by_sheet_worker_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-04-26T08:45:44+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_easy_churro_bites_0009_3001_20260426_by_sheet_worker_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-04-28T09:11:50+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260428_by_sheet_worker_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-04-28T11:14:26+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260428_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2319716}
+2026-04-28T11:15:24+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260428_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2809920}
+2026-04-28T11:16:07+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260428_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2319658}
+2026-04-28T11:17:06+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260428_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1363}
+2026-04-28T11:17:34+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260428_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":1365}
+2026-04-28T11:18:16+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260428_by_sheet_worker_srv_jak25_v1","mode":"TEST","pid":2036408}
+2026-04-29T12:28:25+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260429_by_sheet_worker_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-04-29T12:36:25+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_homemade_apple_butter_0039_3001_20260429_by_sheet_worker_srv_jak25_v2","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-05-02T23:19:26+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-05-02T23:19:59+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2036413}
+2026-05-02T23:20:51+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2319715}
+2026-05-02T23:23:15+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2319716}
+2026-05-02T23:23:28+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":159906}
+2026-05-02T23:23:30+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":1364}
+2026-05-02T23:23:32+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2239554}
+2026-05-02T23:24:09+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2036413}
+2026-05-02T23:24:38+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"yahoo_vegan_coconut_curry_0042_3001_20260502_by_usr00005_srv_jak25_v1","mode":"TEST","pid":2809920}
+2026-05-09T12:39:19+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"comcast_polish_beet_borsch_soup_0050_3001_20260509_by_usr00005_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-05-09T13:05:58+00:00 | CREATE_CAMPAIGN_FORBIDDEN
+2026-05-09T13:21:43+00:00 | CREATE_CAMPAIGN_FORBIDDEN
+2026-05-09T13:21:45+00:00 | CREATE_CAMPAIGN_FORBIDDEN
+2026-05-09T13:23:20+00:00 | CREATE_CAMPAIGN_FORBIDDEN
+2026-05-09T13:30:01+00:00 | CREATE_CAMPAIGN_FORBIDDEN
+2026-05-09T13:36:32+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"comcast_truth_finder_11759_3000_20260509_by_usr00001_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-05-09T13:38:11+00:00 | CREATE_CAMPAIGN_SUCCESS | {"campaign":"comcast_truth_finder_11759_3000_20260509_by_usr00001_srv_jak25_v1","createOnly":true,"dba":"6600 executive center blvd, unit 12b, orlando, fl 32801, united states"}
+2026-05-09T14:14:38+00:00 | CAMPAIGN_TRIGGERED | {"campaign":"comcast_truth_finder_11759_3000_20260509_by_usr00001_srv_jak25_v1","mode":"TEST","pid":3796337}

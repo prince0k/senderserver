@@ -1,0 +1,23 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+# Ignore everything
+*
+
+# Allow gitignore itself
+!.gitignore
+
+# Allow required folders
+!sender_logs/
+!r/
+!internal/
+
+# Allow files inside them
+!sender_logs/**
+!r/**
+!internal/**       
