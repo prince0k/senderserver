@@ -75,11 +75,46 @@ function rand_welcome_str($len) {
     return $out;
 }
 
+function encrypt_token($payload){
+    $key = "9f3a8c7d6e5b4a3c2d1e0f9a8b7c6d5e"; // 32 bytes exact
+    if (strlen($key) !== 32) return null;
+    $iv = random_bytes(16);
+    $json = json_encode($payload, JSON_UNESCAPED_SLASHES);
+    $encrypted = openssl_encrypt($json, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv);
+    if ($encrypted === false) return null;
+    $final = $iv . $encrypted;
+    return rtrim(strtr(base64_encode($final), '+/', '-_'), '=');
+}
+
+function track($type, $email, $rl=null, $list=null, $route=null){
+    $payload = [
+        "type" => $type,
+        "offer_id" => "WELCOME_TRIGGER", // Static ID for triggers
+        "email" => $email,
+        "rl" => $rl,
+        "list_id" => $list,
+        "send_domain" => $route["domain"] ?? null,
+        "vmta" => $route["vmta"] ?? null
+    ];
+    return encrypt_token($payload);
+}
+
+
 /* =========================================================
    BUILD MIME MESSAGE
 ========================================================= */
 
 $fromDomain = explode("@", $fromEmail)[1] ?? "localhost";
+
+/* =========================================================
+   UNSUBSCRIBE LINK
+ ========================================================= */
+
+$unToken = track("unsub", $to, null, null, [
+    "domain" => $fromDomain,
+    "vmta" => $vmta
+]);
+$listUnsubUrl = "https://$fromDomain/r/4.php?k=" . rawurlencode($unToken);
 $boundary   = "----=_WelcomePart_" . md5(uniqid(mt_rand(), true));
 $messageId  = "<w-" . rand_welcome_str(8) . "-" . md5($to) . "@$fromDomain>";
 $date       = date("r");
@@ -95,9 +130,12 @@ $textContent = strip_tags(
 $textContent = html_entity_decode($textContent, ENT_QUOTES, "UTF-8");
 $textContent = preg_replace("/\n{3,}/", "\n\n", trim($textContent));
 
-// Encoded parts
-$textB64 = chunk_split(base64_encode($textContent));
-$htmlB64 = chunk_split(base64_encode($html));
+// Add Unsubscribe Link to bodies
+$htmlWithUnsub = $html . '<br><br><p style="font-size: 11px; color: #999; text-align: center;">You received this because you signed up on our site. <a href="' . $listUnsubUrl . '">Unsubscribe</a></p>';
+$textWithUnsub = $textContent . "\n\nUnsubscribe: " . $listUnsubUrl;
+
+$textB64 = chunk_split(base64_encode($textWithUnsub));
+$htmlB64 = chunk_split(base64_encode($htmlWithUnsub));
 
 $body  = "--$boundary\r\n";
 $body .= "Content-Type: text/plain; charset=UTF-8\r\n";
@@ -108,6 +146,7 @@ $body .= "Content-Type: text/html; charset=UTF-8\r\n";
 $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
 $body .= $htmlB64 . "\r\n";
 $body .= "--$boundary--\r\n";
+
 
 /* =========================================================
    SMTP HEADERS
@@ -121,8 +160,9 @@ $headerBlock .= "Message-ID: $messageId\r\n";
 $headerBlock .= "MIME-Version: 1.0\r\n";
 $headerBlock .= "Content-Type: multipart/alternative; boundary=\"$boundary\"\r\n";
 $headerBlock .= "X-virtual-MTA: $vmta\r\n";
+$headerBlock .= "List-Unsubscribe: <$listUnsubUrl>\r\n";
+$headerBlock .= "List-Unsubscribe-Post: List-Unsubscribe=One-Click\r\n";
 $headerBlock .= "X-Mailer: NutriGuide-Welcome/1.0\r\n";
-$headerBlock .= "List-Unsubscribe: <mailto:unsubscribe@$fromDomain>\r\n";
 
 $fullMessage = $headerBlock . "\r\n" . $body;
 
@@ -167,42 +207,39 @@ if (smtp_code($greeting) !== 220) {
 }
 
 // HELO
-fwrite($smtp, "HELO localhost\r\n");
-$ehloResp = smtp_read($smtp);
-
-// MAIL FROM (Standard style, no VMTA param)
-$mailFromCmd = "MAIL FROM:<$envelopeFrom>\r\n";
-
-fwrite($smtp, $mailFromCmd);
-$mailResp = smtp_read($smtp);
-
-if (smtp_code($mailResp) !== 250) {
-    fwrite($smtp, "QUIT\r\n");
+fputs($smtp, "HELO localhost\r\n");
+list($ok, $resp) = [(int)substr($r = smtp_read($smtp), 0, 3) === 250, $r];
+if (!$ok) {
     fclose($smtp);
     http_response_code(500);
-    exit(json_encode(["error" => "smtp_mail_from_rejected", "resp" => trim($mailResp)]));
+    exit(json_encode(["error" => "smtp_helo_rejected", "resp" => trim($resp)]));
+}
+
+// MAIL FROM
+fputs($smtp, "MAIL FROM:<$envelopeFrom>\r\n");
+list($ok, $resp) = [(int)substr($r = smtp_read($smtp), 0, 3) === 250, $r];
+if (!$ok) {
+    fclose($smtp);
+    http_response_code(500);
+    exit(json_encode(["error" => "smtp_mail_from_rejected", "resp" => trim($resp)]));
 }
 
 // RCPT TO
-fwrite($smtp, "RCPT TO:<$to>\r\n");
-$rcptResp = smtp_read($smtp);
-
-if (smtp_code($rcptResp) !== 250) {
-    fwrite($smtp, "QUIT\r\n");
+fputs($smtp, "RCPT TO:<$to>\r\n");
+list($ok, $resp) = [(int)substr($r = smtp_read($smtp), 0, 3) === 250, $r];
+if (!$ok) {
     fclose($smtp);
     http_response_code(500);
-    exit(json_encode(["error" => "smtp_rcpt_rejected", "resp" => trim($rcptResp)]));
+    exit(json_encode(["error" => "smtp_rcpt_rejected", "resp" => trim($resp)]));
 }
 
 // DATA
-fwrite($smtp, "DATA\r\n");
-$dataResp = smtp_read($smtp);
-
-if (smtp_code($dataResp) !== 354) {
-    fwrite($smtp, "QUIT\r\n");
+fputs($smtp, "DATA\r\n");
+list($ok, $resp) = [(int)substr($r = smtp_read($smtp), 0, 3) === 354, $r];
+if (!$ok) {
     fclose($smtp);
     http_response_code(500);
-    exit(json_encode(["error" => "smtp_data_rejected"]));
+    exit(json_encode(["error" => "smtp_data_rejected", "resp" => trim($resp)]));
 }
 
 // Send message body (dot-stuffing)
