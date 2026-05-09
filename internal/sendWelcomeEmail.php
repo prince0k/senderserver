@@ -120,6 +120,7 @@ $headerBlock .= "Subject: $subject\r\n";
 $headerBlock .= "Message-ID: $messageId\r\n";
 $headerBlock .= "MIME-Version: 1.0\r\n";
 $headerBlock .= "Content-Type: multipart/alternative; boundary=\"$boundary\"\r\n";
+$headerBlock .= "X-virtual-MTA: $vmta\r\n";
 $headerBlock .= "X-Mailer: NutriGuide-Welcome/1.0\r\n";
 $headerBlock .= "List-Unsubscribe: <mailto:unsubscribe@$fromDomain>\r\n";
 
@@ -165,17 +166,12 @@ if (smtp_code($greeting) !== 220) {
     exit(json_encode(["error" => "smtp_greeting_failed"]));
 }
 
-// EHLO
-$ehloHost = $vmta ?: $fromDomain;
-fwrite($smtp, "EHLO $ehloHost\r\n");
+// HELO
+fwrite($smtp, "HELO localhost\r\n");
 $ehloResp = smtp_read($smtp);
 
-// MAIL FROM (with VMTA if specified)
-$mailFromCmd = "MAIL FROM:<$envelopeFrom>";
-if ($vmta) {
-    $mailFromCmd .= " VMTA=$vmta";
-}
-$mailFromCmd .= "\r\n";
+// MAIL FROM (Standard style, no VMTA param)
+$mailFromCmd = "MAIL FROM:<$envelopeFrom>\r\n";
 
 fwrite($smtp, $mailFromCmd);
 $mailResp = smtp_read($smtp);
