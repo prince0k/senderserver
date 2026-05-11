@@ -130,8 +130,13 @@ $textContent = strip_tags(
 $textContent = html_entity_decode($textContent, ENT_QUOTES, "UTF-8");
 $textContent = preg_replace("/\n{3,}/", "\n\n", trim($textContent));
 
+// Resolve dynamic tags in HTML
+$fromDomain = explode("@", $fromEmail)[1] ?? "localhost";
+$imageHost = "https://" . $fromDomain;
+$htmlResolved = str_replace(["{{IMAGE_HOST}}", "{dba}"], [$imageHost, "Support"], $html);
+
 // Add Unsubscribe Link to bodies
-$htmlWithUnsub = $html . '<br><br><p style="font-size: 11px; color: #999; text-align: center;">You received this because you signed up on our site. <a href="' . $listUnsubUrl . '">Unsubscribe</a></p>';
+$htmlWithUnsub = $htmlResolved . '<br><br><p style="font-size: 11px; color: #999; text-align: center;">You received this because you signed up on our site. <a href="' . $listUnsubUrl . '">Unsubscribe</a></p>';
 $textWithUnsub = $textContent . "\n\nUnsubscribe: " . $listUnsubUrl;
 
 $textB64 = chunk_split(base64_encode($textWithUnsub));
