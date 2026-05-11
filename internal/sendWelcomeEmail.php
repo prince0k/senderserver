@@ -157,8 +157,8 @@ $customHeaders = $data["customHeaders"] ?? "";
 
 if (!empty($customHeaders)) {
     $headerBlock = str_replace(
-        ["{date}", "{fromName}", "{fromEmail}", "{to}", "{subject}", "{mid}", "{vmta}"],
-        [$date, $fromName, $fromEmail, $to, $subject, $messageId, $vmta],
+        ["{date}", "{fromName}", "{fromEmail}", "{to}", "{subject}", "{mid}", "{vmta}", "{boundary}", "{listUnsubUrl}", "{replyTo}"],
+        [$date, $fromName, $fromEmail, $to, $subject, $messageId, $vmta, $boundary, $listUnsubUrl, $fromEmail],
         $customHeaders
     );
     // Ensure CRLF
