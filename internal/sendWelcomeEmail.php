@@ -152,17 +152,30 @@ $body .= "--$boundary--\r\n";
    SMTP HEADERS
 ========================================================= */
 
-$headerBlock  = "Date: $date\r\n";
-$headerBlock .= "From: $fromName <$fromEmail>\r\n";
-$headerBlock .= "To: " . ($toName ? "$toName <$to>" : "<$to>") . "\r\n";
-$headerBlock .= "Subject: $subject\r\n";
-$headerBlock .= "Message-ID: $messageId\r\n";
-$headerBlock .= "MIME-Version: 1.0\r\n";
-$headerBlock .= "Content-Type: multipart/alternative; boundary=\"$boundary\"\r\n";
-$headerBlock .= "X-virtual-MTA: $vmta\r\n";
-$headerBlock .= "List-Unsubscribe: <$listUnsubUrl>\r\n";
-$headerBlock .= "List-Unsubscribe-Post: List-Unsubscribe=One-Click\r\n";
-$headerBlock .= "X-Mailer: NutriGuide-Welcome/1.0\r\n";
+$date = date("r");
+$customHeaders = $data["customHeaders"] ?? "";
+
+if (!empty($customHeaders)) {
+    $headerBlock = str_replace(
+        ["{date}", "{fromName}", "{fromEmail}", "{to}", "{subject}", "{mid}", "{vmta}"],
+        [$date, $fromName, $fromEmail, $to, $subject, $messageId, $vmta],
+        $customHeaders
+    );
+    // Ensure CRLF
+    $headerBlock = str_replace("\n", "\r\n", str_replace("\r\n", "\n", $headerBlock));
+} else {
+    $headerBlock  = "Date: $date\r\n";
+    $headerBlock .= "From: $fromName <$fromEmail>\r\n";
+    $headerBlock .= "To: " . ($toName ? "$toName <$to>" : "<$to>") . "\r\n";
+    $headerBlock .= "Subject: $subject\r\n";
+    $headerBlock .= "Message-ID: $messageId\r\n";
+    $headerBlock .= "MIME-Version: 1.0\r\n";
+    $headerBlock .= "Content-Type: multipart/alternative; boundary=\"$boundary\"\r\n";
+    $headerBlock .= "X-virtual-MTA: $vmta\r\n";
+    $headerBlock .= "List-Unsubscribe: <$listUnsubUrl>\r\n";
+    $headerBlock .= "List-Unsubscribe-Post: List-Unsubscribe=One-Click\r\n";
+    $headerBlock .= "X-Mailer: NutriGuide-Welcome/1.0\r\n";
+}
 
 $fullMessage = $headerBlock . "\r\n" . $body;
 

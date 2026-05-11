@@ -38,7 +38,13 @@ if (!is_array($data)) {
    REQUIRED INPUT
 ========================================================= */
 
-$campaignName = trim($data["campaignName"] ?? "");
+function safe_name($value) {
+    $value = strtolower(trim($value));
+    $value = preg_replace("/[^a-zA-Z0-9_-]/", "_", $value);
+    return substr($value, 0, 120);
+}
+
+$campaignName = safe_name($data["campaignName"] ?? "");
 $MODE         = $data["mode"] ?? null;
 $ROUTES       = $data["routes"] ?? null;
 

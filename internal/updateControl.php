@@ -22,7 +22,13 @@ if (
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$campaignName = trim($data["campaignName"] ?? "");
+function safe_name($value) {
+    $value = strtolower(trim($value));
+    $value = preg_replace("/[^a-zA-Z0-9_-]/", "_", $value);
+    return substr($value, 0, 120);
+}
+
+$campaignName = safe_name($data["campaignName"] ?? "");
 $action       = trim($data["action"] ?? "");
 
 if (!$campaignName || !$action) {

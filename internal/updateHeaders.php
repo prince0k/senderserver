@@ -14,7 +14,13 @@ if (
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$campaign = $data["campaignName"] ?? null;
+function safe_name($value) {
+    $value = strtolower(trim($value));
+    $value = preg_replace("/[^a-zA-Z0-9_-]/", "_", $value);
+    return substr($value, 0, 120);
+}
+
+$campaign = safe_name($data["campaignName"] ?? "");
 $subject  = isset($data["subject"]) ? trim($data["subject"]) : null;
 $fromName = isset($data["fromName"]) ? trim($data["fromName"]) : null;
 
