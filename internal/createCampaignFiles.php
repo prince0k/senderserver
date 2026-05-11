@@ -88,7 +88,7 @@ if (!$createOnly) {
    BASE DIR
 ========================================================= */
 
-$baseDir = "/var/www/html/internal/campaigns/$campaign";
+$baseDir = __DIR__ . "/campaigns/$campaign";
 
 if (!is_dir($baseDir)) {
     if (is_dir($baseDir)) {
