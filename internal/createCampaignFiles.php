@@ -88,12 +88,9 @@ if (!$createOnly) {
    BASE DIR
 ========================================================= */
 
-$baseDir = __DIR__ . "/campaigns/$campaign";
+$baseDir = __DIR__ . DIRECTORY_SEPARATOR . "campaigns" . DIRECTORY_SEPARATOR . $campaign;
 
 if (!is_dir($baseDir)) {
-    if (is_dir($baseDir)) {
-        fail("campaign_already_exists", ["campaign"=>$campaign]);
-    }
     if (!mkdir($baseDir, 0775, true)) {
         fail("campaign_dir_create_failed", ["path"=>$baseDir]);
     }
