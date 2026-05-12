@@ -139,17 +139,32 @@ $htmlResolved = str_replace(["{{IMAGE_HOST}}", "{dba}"], [$imageHost, "Support"]
 $htmlWithUnsub = $htmlResolved . '<br><br><p style="font-size: 11px; color: #999; text-align: center;">You received this because you signed up on our site. <a href="' . $listUnsubUrl . '">Unsubscribe</a></p>';
 $textWithUnsub = $textContent . "\n\nUnsubscribe: " . $listUnsubUrl;
 
-$textB64 = chunk_split(base64_encode($textWithUnsub));
-$htmlB64 = chunk_split(base64_encode($htmlWithUnsub));
+$textEncoding = $data["textEncoding"] ?? "base64";
+$htmlEncoding = $data["htmlEncoding"] ?? "base64";
+
+function encode_part($content, $encoding) {
+    if ($encoding === "quoted-printable") {
+        return quoted_printable_encode($content);
+    } elseif ($encoding === "base64") {
+        return chunk_split(base64_encode($content));
+    } elseif ($encoding === "8bit") {
+        return $content; // Raw 8-bit
+    } else {
+        return $content; // Fallback to 7bit/8bit
+    }
+}
+
+$encodedText = encode_part($textWithUnsub, $textEncoding);
+$encodedHtml = encode_part($htmlWithUnsub, $htmlEncoding);
 
 $body  = "--$boundary\r\n";
 $body .= "Content-Type: text/plain; charset=UTF-8\r\n";
-$body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-$body .= $textB64 . "\r\n";
+$body .= "Content-Transfer-Encoding: $textEncoding\r\n\r\n";
+$body .= $encodedText . "\r\n";
 $body .= "--$boundary\r\n";
 $body .= "Content-Type: text/html; charset=UTF-8\r\n";
-$body .= "Content-Transfer-Encoding: base64\r\n\r\n";
-$body .= $htmlB64 . "\r\n";
+$body .= "Content-Transfer-Encoding: $htmlEncoding\r\n\r\n";
+$body .= $encodedHtml . "\r\n";
 $body .= "--$boundary--\r\n";
 
 
