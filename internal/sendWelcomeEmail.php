@@ -110,32 +110,31 @@ $fromDomain = explode("@", $fromEmail)[1] ?? "localhost";
    UNSUBSCRIBE LINK
  ========================================================= */
 
-$unToken = track("unsub", $to, null, null, [
-    "domain" => $fromDomain,
-    "vmta" => $vmta
-]);
-$listUnsubUrl = "https://$fromDomain/r/4.php?k=" . rawurlencode($unToken);
+// Resolve core tracking links
+$trackBase = "https://" . $fromDomain;
 $boundary   = "----=_WelcomePart_" . md5(uniqid(mt_rand(), true));
 $messageId  = "<w-" . rand_welcome_str(8) . "-" . md5($to) . "@$fromDomain>";
 $date       = date("r");
+$redirection1 = $trackBase . "/r/2.php?k=" . rawurlencode(track("click", $to, 1, null, ["domain" => $fromDomain, "vmta" => $vmta]));
+$redirection2 = $trackBase . "/r/2.php?k=" . rawurlencode(track("click", $to, 2, null, ["domain" => $fromDomain, "vmta" => $vmta]));
+$optout = $trackBase . "/r/3.php?k=" . rawurlencode(track("optout", $to, null, null, ["domain" => $fromDomain, "vmta" => $vmta]));
+$uns = $trackBase . "/r/4.php?k=" . rawurlencode(track("unsub", $to, null, null, ["domain" => $fromDomain, "vmta" => $vmta]));
+$impression = $trackBase . "/r/1.php?k=" . rawurlencode(track("open", $to, null, null, ["domain" => $fromDomain, "vmta" => $vmta]));
+$listUnsubUrl = $uns; // Consistency
 
-// Plain text fallback
-$textContent = strip_tags(
-    str_replace(
-        ["<br>", "<br/>", "<br />", "</p>", "</h1>", "</h2>", "</h3>", "</li>"],
-        "\n",
-        $html
-    )
-);
+$search = ["{redirection1}", "{redirection2}", "{optout}", "{uns}", "{impression}", "{{IMAGE_HOST}}", "{dba}"];
+$replace = [$redirection1, $redirection2, $optout, $uns, $impression, $trackBase, "Support"];
+
+$htmlResolved = str_replace($search, $replace, $html);
+
+// Convert HTML to Text with link preservation
+$textContent = preg_replace('/<a\s+href="([^"]+)"[^>]*>(.*?)<\/a>/is', '$2 ($1)', $htmlResolved);
+$textContent = str_replace(["<br>", "<br/>", "<br />", "</p>", "</h1>", "</h2>", "</h3>", "</li>"], "\n", $textContent);
+$textContent = strip_tags($textContent);
 $textContent = html_entity_decode($textContent, ENT_QUOTES, "UTF-8");
 $textContent = preg_replace("/\n{3,}/", "\n\n", trim($textContent));
 
-// Resolve dynamic tags in HTML
-$fromDomain = explode("@", $fromEmail)[1] ?? "localhost";
-$imageHost = "https://" . $fromDomain;
-$htmlResolved = str_replace(["{{IMAGE_HOST}}", "{dba}"], [$imageHost, "Support"], $html);
-
-// Add Unsubscribe Link to bodies
+// Add Unsubscribe footer
 $htmlWithUnsub = $htmlResolved . '<br><br><p style="font-size: 11px; color: #999; text-align: center;">You received this because you signed up on our site. <a href="' . $listUnsubUrl . '">Unsubscribe</a></p>';
 $textWithUnsub = $textContent . "\n\nUnsubscribe: " . $listUnsubUrl;
 
