@@ -16,6 +16,8 @@ coverage/
 !sender_logs/
 !r/
 !internal/
+!agent/
+!agent/**
 
 # Allow files inside them
 !sender_logs/**
