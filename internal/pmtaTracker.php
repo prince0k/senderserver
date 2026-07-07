@@ -17,14 +17,51 @@ usort($files, function ($a, $b) {
 });
 
 $API_URL = "http://localhost:3001/api/campaigns/updatePmtaStats";
-$INTERNAL_KEY = "super_secret_global_key";
-
-echo "Using file: $ACCT_FILE\n";
+require_once __DIR__ . "/config/security.php";
+$INTERNAL_KEY = getInternalKey();
 
 
 /* ==============================
    HELPERS
 ============================== */
+
+function classify_bounce($reason) {
+    if (!$reason) return false;
+    
+    $hard_patterns = [
+        '/5\.1\.1/',
+        '/invalid\s+recipient/i',
+        '/user\s+(unknown|not\s+found|does\s+not\s+exist|disabled)/i',
+        '/mailbox\s+(unavailable|not\s+found|does\s+not\s+exist|disabled|inactive)/i',
+        '/no\s+such\s+(user|recipient|mailbox)/i',
+        '/recipient\s+address\s+rejected/i',
+        '/address\s+rejected/i',
+        '/account\s+(disabled|inactive|suspended)/i',
+        
+        '/5\.4\.4/',
+        '/unable\s+to\s+route/i',
+        '/unrouteable\s+address/i',
+        '/domain\s+(not\s+found|does\s+not\s+exist)/i',
+        
+        '/5\.2\.2/',
+        '/mailbox\s+full/i',
+        '/quota\s+exceeded/i',
+        
+        '/554\.30/',
+        '/permanent\s+block/i',
+        '/ip\s+blocked/i',
+        '/spam\s+rejected/i',
+        '/rejected\s+as\s+spam/i',
+    ];
+    
+    foreach ($hard_patterns as $pattern) {
+        if (preg_match($pattern, $reason)) {
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 function detect_isp($domain)
 {
@@ -155,28 +192,7 @@ foreach ($files as $ACCT_FILE) {
             $dsnDiag   = strtolower(trim($row[9] ?? ""));
             $reason = $dsnStatus . " " . $dsnDiag;
 
-            $isHard = false;
-
-            if (
-                strpos($reason, "mailbox full") !== false ||
-                strpos($reason, "quota exceeded") !== false ||
-                strpos($reason, "5.2.2") !== false ||
-
-                strpos($reason, "invalid recipient") !== false ||
-                strpos($reason, "user unknown") !== false ||
-                strpos($reason, "recipient address rejected") !== false ||
-                strpos($reason, "mailbox unavailable") !== false ||
-
-                strpos($reason, "mailbox disabled") !== false ||
-                strpos($reason, "account disabled") !== false ||
-                strpos($reason, "554.30") !== false ||
-
-                strpos($reason, "5.1.1") !== false ||
-                strpos($reason, "5.4.4") !== false ||
-                strpos($reason, "unable to route") !== false
-            ) {
-                $isHard = true;
-            }
+            $isHard = classify_bounce($reason);
 
             if ($isHard) {
 

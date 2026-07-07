@@ -76,7 +76,8 @@ function rand_welcome_str($len) {
 }
 
 function encrypt_token($payload){
-    $key = "9f3a8c7d6e5b4a3c2d1e0f9a8b7c6d5e"; // 32 bytes exact
+    $keyStr = getenv("TRACKING_AES_KEY");
+    $key = $keyStr ? $keyStr : "9f3a8c7d6e5b4a3c2d1e0f9a8b7c6d5e"; // 32 bytes exact
     if (strlen($key) !== 32) return null;
     $iv = random_bytes(16);
     $json = json_encode($payload, JSON_UNESCAPED_SLASHES);
